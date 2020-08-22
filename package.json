@@ -1,0 +1,31 @@
+{
+  "name": "Express-note-maker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomasMullaney/Express-note-maker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThomasMullaney/Express-note-maker/issues"
+  },
+  "homepage": "https://github.com/ThomasMullaney/Express-note-maker#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "parser": "^0.1.4",
+    "path": "^0.12.7",
+    "route": "^0.2.5",
+    "server": "^1.0.30",
+    "shortid": "^2.2.15",
+    "uuid": "^8.3.0"
+  }
+}

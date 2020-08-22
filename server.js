@@ -1,57 +1,91 @@
-var path = require("path");
+const path = require("path");
 const fs = require("fs");
 const express = require("express");
-var noteData= require("./db/db.json")
+const shortid = require("shortid");
 
-// const routeApi = require("./routes/api");
-// const routeHtml = require("./routes/html");
-
-
-// matts version of code
-// const PORT = process.env.PORT // 3000;
-
-// app.use(express.static("public"));
-// app.use(express.urlencoded({extended: ture}));
-// app.use(express.json());
-
-// require("./Develop/routes/apiRoutes")(app);
-// require("./Develop/routes/htmlRoutes")(app);
-
-
-const PORT = process.env.PORT || 2000;
+// Express App
 const app = express();
+// setup server port
+var PORT = process.env.PORT || 8000; 
 
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// Create static folder to retrive css and js 
+app.use(express.static(path.join(__dirname, 'public')));
 
-// HTML ROUTEs
-app.get("/", function(req, res){
-    res.sendFile(path.join(__dirname, "./develop/public/index.html"))
-});
-app.get("/notes", function(req, res){
-    res.sendFile(path.join(__dirname, "./Develop/public/notes.html"));
-});
-app.get("*", function(req,res){
-    res.sendFile(path.join(__dirname, "./Develop/public/index.html"))
+
+// Basic Routes
+app.get('/', (req, res) => {
+    console.log("app.get '/' hit");
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-
-
-// API ROUTES
-
-
-app.get("/api/notes", function(req, res){
-
+app.get('/notes', (req, res) => {
+    console.log("app.get '/' hit");
+    res.sendFile(path.join(__dirname, 'public', 'notes.html'));
 });
 
-app.post("/api/notes", function(req, res){
-    console.log("Testing")
-    fs.writeFile(noteData, function(err, data){
-        if (err) throw err;
-        res.writeHead(200, {"Content-Type": "text/html"});
+// GET REQUEST
+app.get('/api/notes', (req, res) => {
+    console.log("app.get request hit");
+    fs.readFile('public/db/db.json', 'utf8', function(err, data){
+        if (err){ throw err};
+        var allNotes = JSON.parse(data);
+        return res.json(allNotes);
     });
 });
 
+// Post Request
+app.post('/api/notes', (req, res) => {
+    fs.readFile("public/db/db.json", function(error, data) {
+      if (error) {
+        throw error;
+      };
+      let allNotes = JSON.parse(data);
+      let newNote = {
+        title: req.body.title,
+        text: req.body.text,
+        id: shortid.generate()
+      }
+      allNotes.push(newNote);
+      fs.writeFile("public/db/db.json", JSON.stringify(allNotes, null, 2), (error) => {
+        if (error) {
+          throw error;
+        };
+        res.send('200');
+      });
+    });
+  });
+
+
+// Delete Request
+app.delete('/api/notes/:id', (req, res) => {
+    console.log("app delete request hit");
+    let chosen = req.params.id;
+    fs.readFile('public/db/db.json', (err, data) =>{
+        
+        if (err){throw err};
+        
+        // db gathering for json update
+        let allNotes = JSON.parse(data);
+        function searchChosen(chosen, allNotes){
+            for (var i = 0; i < allNotes.length; i++){
+                if (allNotes[i].id === chosen){allNotes.splice(i, 1)};
+            }
+        }
+        searchChosen(chosen, allNotes);
+        // Write updated Json to array
+        fs.writeFile('public/db/db.json', JSON.stringify(allNotes, null, 2),(err) => {
+            console.log("fs.writeFile-delete hit");
+            // Error Check
+            if (err){throw err};
+            res.send('200');
+        });
+    });
+});
+
+
+
 app.listen(PORT, function(){
-    console.log("App listening on PORT " + PORT)
+    console.log("Coming in loud and clear at PORT: " + PORT);   
 });
