@@ -1,5 +1,5 @@
 # Express-note-maker
-[![Generic badge](https://img.shields.io/badge/<SUBJECT>-<STATUS>-<COLOR>.svg)](https://shields.io/)
+
 <div>
     <h4>
     </a>
@@ -28,38 +28,51 @@ This is a note taking application</p>
 
 ![Screenshot of apllication demo](img/notesCapture.PNG)
 
-
-
 ## Description:
+
 ### A note taking application.
 
 ## Table of Contents:
-     
+
 1. [Installation](#installation)
 2. [Usage](#usage)
 3. [License](#license)
 4. [Contributing](#contributing)
 5. [Tests](#tests)
-6. [Questions](#questions) 
+6. [Questions](#questions)
 
-## Installation: 
+## Installation:
+
 ### npm install && npm start
 
 ## Usage:
+
 ### The user is able to create and save notes, view previously saved notes, and delete previously saved notes.
 
+## Technologies:
+
+<ul>
+<li>HTML, CSS, Bootstrap</li>
+<li>Javascript, jQuery, JSON</li>
+<li>MongoDB</li>
+<li>node.js, Express</li>
+<li>Github, Heroku</li>
+</ul>
+
 ## License:
+
 ### [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
-    
+
 ## Contributing:
+
 ### Tom Mullaney
 
 ## Tests:
-### 
 
-    
+###
+
 ## Questions:
+
 ### github.com/ThomasMullaney
+
 ### tloring.mullaney@gmail.com
-    
-    
