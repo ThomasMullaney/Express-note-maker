@@ -30,7 +30,7 @@ This is a note taking application</p>
 
 ## Description:
 
-### A note taking application.
+### A note taking application. 
 
 ## Table of Contents:
 
@@ -47,7 +47,7 @@ This is a note taking application</p>
 
 ## Usage:
 
-### The user is able to create and save notes, view previously saved notes, and delete previously saved notes.
+### The user is able to create multiple notes and title them to assist with organization. Users can view saved notes, and delete previously saved notes.
 
 ## Technologies:
 
